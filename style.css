@@ -1,0 +1,212 @@
+/**
+ * Phasmo Finder UI Stylesheet v2.0
+ * Design Principles: High Contrast, One-handed Operation, Dark Mode
+ */
+
+:root {
+    --bg: #0f0f0f;
+    --card-bg: #1e1e1e;
+    --accent: #ff4757;       /* 否定・リセット */
+    --success: #2ed573;      /* 確定 */
+    --warning: #ffa502;      /* ミミック・特殊 */
+    --text: #f1f2f6;
+    --text-dim: #a4b0be;
+    --border: #2f3542;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 12px;
+    line-height: 1.5;
+    user-select: none; /* 誤操作防止 */
+}
+
+/* Header & Reset */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 16px;
+}
+
+h1 { font-size: 1.1rem; margin: 0; color: var(--accent); letter-spacing: 1px; }
+
+#reset-btn {
+    background: #333;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+#reset-btn:active { background: var(--accent); color: white; }
+
+/* Filter Cards */
+.card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+h3 {
+    margin: 0 0 12px 0;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Button Base Styles */
+button {
+    background: #333;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.15s ease-in-out;
+}
+
+/* Evidence States */
+button.active {
+    background: var(--success);
+    color: #000;
+    border-color: var(--success);
+    font-weight: bold;
+}
+
+button.excluded {
+    background: #4b1a1e;
+    color: var(--accent);
+    border-color: var(--accent);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+/* Trait Tag Styles */
+.trait-btn {
+    font-size: 0.75rem;
+    background: #252525;
+}
+
+.trait-btn.active {
+    background: #3498db; /* 青系で証拠と差別化 */
+    color: white;
+}
+
+/* Results Section */
+#status-bar {
+    padding: 8px 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+}
+
+#count { color: var(--success); font-size: 1.1rem; }
+
+/* Ghost Card */
+.ghost-card {
+    background: var(--card-bg);
+    border-left: 5px solid var(--border);
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    transition: transform 0.1s;
+}
+
+.ghost-card:active { transform: scale(0.98); }
+
+.g-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Evidence Tags in Card */
+.g-ev {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.ev-tag {
+    font-size: 0.7rem;
+    background: #333;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--text-dim);
+    border: 1px solid transparent;
+}
+
+.ev-tag.found {
+    color: var(--success);
+    border-color: var(--success);
+    background: rgba(46, 213, 115, 0.1);
+}
+
+.ev-tag.not-found {
+    text-decoration: line-through;
+    opacity: 0.4;
+}
+
+/* Special Badges */
+.mimic-orb {
+    color: var(--warning);
+    border: 1px dashed var(--warning);
+    background: rgba(255, 165, 2, 0.1);
+}
+
+.mimic-badge {
+    background: var(--warning);
+    color: #000;
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.g-desc {
+    font-size: 0.85rem;
+    color: #cbd5e0;
+    margin-bottom: 8px;
+}
+
+.g-threshold {
+    font-size: 0.8rem;
+    color: var(--warning);
+    font-family: monospace;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    button { padding: 12px 16px; flex-grow: 1; justify-content: center; }
+    h1 { font-size: 1rem; }
+}

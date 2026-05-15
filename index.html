@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phasmo Finder PWA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+    <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+    <header>
+        <h1>Phasmo Finder v2026</h1>
+        <button id="reset-btn">Reset</button>
+    </header>
+
+    <main>
+        <!-- Evidence Selection -->
+        <section class="card">
+            <h3>Evidence (証拠)</h3>
+            <div class="filter-group" id="evidence-filters"></div>
+        </section>
+
+        <!-- Speed & Behavior Filters -->
+        <section class="card">
+            <h3>Behavior (挙動タグ)</h3>
+            <div class="filter-group" id="trait-filters">
+                <button class="trait-btn" data-trait="fast">高速(1.7m/s~)</button>
+                <button class="trait-btn" data-trait="slow">低速(~1.5m/s)</button>
+                <button class="trait-btn" data-trait="variable">変速</button>
+                <button class="trait-btn" data-trait="early">早ハント(50%~)</button>
+                <button class="trait-btn" data-trait="late">遅ハント(~35%)</button>
+                <button class="trait-btn" data-trait="special_los">特殊視認加速</button>
+                <button class="trait-btn" data-trait="no_los">視認加速なし</button>
+                <button class="trait-btn" data-trait="sound">音響追跡</button>
+                <button class="trait-btn" data-trait="items">アイテム反応</button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results">
+            <div id="status-bar">
+                該当件数: <span id="count">0</span>
+            </div>
+            <div id="ghost-list"></div>
+        </section>
+    </main>
+
+    <script src="ghosts.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
