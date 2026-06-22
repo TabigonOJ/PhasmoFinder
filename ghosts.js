@@ -5,6 +5,16 @@
  *       special_los (特殊加速/点滅), no_los (視認加速なし), sound (音響特性), items (機材反応)
  */
 
+const EVIDENCE_MAP = {
+    EMF5: "EMFレベル5",
+    Orbs: "ゴーストオーブ",
+    Box: "スピリットボックス",
+    Writing: "ライティング",
+    UV: "紫外線",
+    Freezing: "氷点下",
+    DOTS: "DOTS"
+};
+
 const GHOST_DATA = [
     // --- Winter 2025-2026 New Ghosts ---
     { 
