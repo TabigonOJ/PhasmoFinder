@@ -1,7 +1,7 @@
 /**
  * Phasmophobia Ghost Database - Full Version (May 2026 Update Compatible)
  * Total: 29 Ghosts (24 Classic + 5 New Ghosts)
- * Params: traits [fast, slow, has_los, no_los, early, tracking, variable, unique_blink, special_smudge, state_cycle]
+ * Tags: [fast, slow, variable, early, late, special_los, no_los, sound, items]
  */
 
 const EVIDENCE_MAP = {
@@ -19,208 +19,208 @@ const GHOST_DATA = [
     { 
         name: "ダヤン (Dayan)", 
         evidence: ["EMF5", "Orbs", "Box"], 
-        traits: ["fast", "slow", "early", "no_los", "female_only"], 
+        traits: ["fast", "slow", "variable", "early", "late", "no_los"], 
         threshold: "65% (動) / 45% (止) / 50% (遠)", 
-        desc: "女性限定。10m内のプレイヤーの移動を検知。動くと高速(2.25m/s)、止まると鈍足(1.2m/s)固定。10m以上離れると標準速＋LoS加速あり。" 
+        desc: "女性限定。10m内のプレイヤーが動くと高速(2.25m/s)、止まると鈍足(1.2m/s)に固定 [1, 2]。10m内では視認加速が無効化される [3]。" 
     },
     { 
         name: "ガルル (Gallu)", 
         evidence: ["EMF5", "UV", "Box"], 
-        traits: ["fast", "slow", "has_los", "state_cycle", "items"], 
+        traits: ["fast", "slow", "variable", "early", "late", "items"], 
         threshold: "60% (激) / 50% (通) / 40% (疲)", 
-        desc: "防護装備(塩/十字架/浄化香)で激昂(1.96m/s)。激昂時は塩無視。ハント後は疲弊し、鈍足化(1.36m/s)。疲弊中に装備使用で通常へ戻る。" 
+        desc: "防護装備(塩/十字架/浄化香)で激昂(1.96m/s)し塩を無視。ハント後は疲弊し鈍足化(1.36m/s) [4, 5]。アイテムで状態がサイクルする。" 
     },
     { 
         name: "オバンボ (Obambo)", 
         evidence: ["Writing", "UV", "DOTS"], 
-        traits: ["fast", "early", "has_los", "state_cycle"], 
+        traits: ["fast", "slow", "variable", "early"], 
         threshold: "65% (攻) / 10% (穏)", 
-        desc: "2分周期でステート遷移。攻撃時は1.96m/sかつハント時間が20%短縮。ハント中に状態が変わることもあり、足音が突然変化する。" 
+        desc: "2分周期でステート遷移。攻撃時は1.96m/sかつハント時間が20%短縮。ハント中も足音が突然変化する [6-8]。" 
     },
     { 
         name: "アスワング (Aswang)", 
         evidence: ["Freezing", "Writing", "DOTS"], 
-        traits: ["fast", "has_los", "special_los", "hiding_interaction"], 
+        traits: ["fast", "slow", "special_los"], 
         threshold: "50%", 
-        desc: "LoS加速が極めて急峻(8.67秒で最大2.53m/s)。公式安置(クローゼット等)に入るとハントを強制終了して消えるが、次回猶予0秒でその場所を強襲する。" 
+        desc: "LoS加速が極めて急峻(8.67秒で最高速2.53m/s)。公式安地に入ると消滅するが、次回猶予0秒でその場を強襲する [2, 9, 10]。" 
     },
     { 
         name: "コルモス (Kormos)", 
         evidence: ["Orbs", "Box", "UV"], 
-        traits: ["blind", "fast", "no_los", "sound_tracking", "lethal"], 
-        threshold: "50% (通常) / 70% (走行検知)", 
-        desc: "全盲。足音や電子機器を検知し擬似LoS加速(最大3.65m/s)。1.5m内は壁抜けキル発生。完全に静止して音を立てなければ素通りされる。" 
+        traits: ["fast", "early", "no_los", "sound"], 
+        threshold: "50% (通常) / 70% (走行)", 
+        desc: "全盲。足音や電子機器を検知し擬似LoS加速(最大3.65m/s)。1.5m内は壁抜けキル発生。静止・消灯で回避可能 [11-13]。" 
     },
 
     // --- Kinetic Focused Entities ---
     { 
         name: "レヴナント", 
         evidence: ["Orbs", "Writing", "Freezing"], 
-        traits: ["fast", "slow", "no_los", "variable"], 
+        traits: ["fast", "slow", "variable", "no_los"], 
         threshold: "50%", 
-        desc: "非検知時1.0m/s(最遅)。プレイヤーを視認・感知した瞬間に3.0m/sへ爆発的に加速。視線を切ると最後に感知した位置まで加速を維持する。" 
+        desc: "非検知時1.0m/s(最遅)。プレイヤーを視認・感知した瞬間に3.0m/sへ爆発加速。通常の視認加速は行わない [2, 14]。" 
     },
     { 
         name: "デオヘン", 
         evidence: ["Box", "Writing", "DOTS"], 
-        traits: ["fast", "slow", "no_los", "tracking", "unique_blink", "no_hide"], 
+        traits: ["fast", "slow", "variable", "late", "no_los"], 
         threshold: "40%", 
-        desc: "常時位置把握。遠距離3.0m/s、至近距離0.4m/s。隠れ場所無効。1m以内のスピボで固有の重い呼吸音(33%)。視認加速なし。実体化時間が長い。" 
+        desc: "常時位置把握。遠距離3.0m/s、至近距離0.4m/s。隠れ場所無効。1m以内のスピボで固有の重い呼吸音(33%) [2, 15, 16]。" 
     },
     { 
         name: "セーイ", 
         evidence: ["Orbs", "Writing", "DOTS"], 
-        traits: ["fast", "slow", "no_los", "aging", "variable"], 
+        traits: ["fast", "slow", "variable", "early", "late", "no_los"], 
         threshold: "74% ～ 14%", 
-        desc: "滞在時間で老化。若年期は2.75m/s(全ゴースト最速級)。老化で1.0m/sまで減速。視認加速なし。最高齢になると超常現象を停止する。" 
+        desc: "滞在時間で老化。若年期は2.75m/s(加速なし)。老化で1.0m/sまで減速。視認加速を一切行わない [17-19]。" 
     },
     { 
         name: "モーロイ", 
         evidence: ["Box", "Writing", "Freezing"], 
-        traits: ["fast", "has_los", "sanity_speed", "special_smudge"], 
+        traits: ["fast", "variable", "items"], 
         threshold: "50%", 
-        desc: "正気度が低いほど高速化(最大2.25m/s)。LoS込みの最高速は3.71m/s(ゲーム内最速)。ハント中の浄化香による盲目時間が7秒と長い。" 
+        desc: "SAN値が低いほど高速化(最大2.25m/s、LoS込み3.71m/s)。浄化香の盲目時間が7秒と長い。スピボで呪いを付与する [20-22]。" 
     },
     { 
         name: "ハントゥ", 
         evidence: ["UV", "Orbs", "Freezing"], 
-        traits: ["fast", "no_los", "temp_speed", "forced_evidence"], 
+        traits: ["fast", "slow", "variable", "no_los"], 
         threshold: "50%", 
-        desc: "温度依存速度。氷点下で2.7m/s、15℃以上で1.4m/s。LoS加速なし。ブレーカーOFFのハント中に白い息。氷点下を必ず出す。" 
+        desc: "温度依存速度。氷点下で2.7m/s、15℃以上で1.4m/s。LoS加速なし。ハント中に口元から白い息を吐き出す [7, 23, 24]。" 
     },
     { 
         name: "雷獣", 
         evidence: ["EMF5", "Orbs", "DOTS"], 
-        traits: ["fast", "no_los", "electronics_boost", "early"], 
-        threshold: "50% (通常) / 65% (機器付近)", 
-        desc: "稼働中の電子機器付近で加速(2.5m/s固定)。電磁妨害範囲(15m)が広く、足音BPMが機器周辺で即座に変化する。視認加速なし。" 
-    },
-    { 
-        name: "ツインズ", 
-        evidence: ["EMF5", "Box", "Freezing"], 
-        traits: ["fast", "slow", "has_los", "variable_speed", "dual_interact"], 
-        threshold: "50%", 
-        desc: "本体(1.5m/s)と分身(1.9m/s)でハントごとに速度が変化。離れた2箇所でほぼ同時に干渉。LoS計算が特殊で、標準速(1.7)の加速を継承する。" 
+        traits: ["fast", "early", "no_los"], 
+        threshold: "50% (通) / 65% (機)", 
+        desc: "稼働中の電子機器付近で加速(2.5m/s固定)。電磁妨害範囲が15mと広い。機器周辺では視認加速が無効化される [5, 14, 25]。" 
     },
     { 
         name: "ジン", 
         evidence: ["EMF5", "UV", "Freezing"], 
-        traits: ["fast", "has_los", "electricity_link"], 
+        traits: ["fast", "variable", "special_los"], 
         threshold: "50%", 
-        desc: "ブレーカーON時、3m以上離れたプレイヤーを視認すると2.5m/sで急行。接近すると通常速に戻る。絶対に自らブレーカーを落とさない。" 
+        desc: "ブレーカーON時、3m以上離れたプレイヤーを視認すると2.5m/sで急行。3m以内で通常速LoS加速へ移行 [11, 26, 27]。" 
+    },
+    { 
+        name: "ツインズ", 
+        evidence: ["EMF5", "Box", "Freezing"], 
+        traits: ["fast", "slow", "variable"], 
+        threshold: "50%", 
+        desc: "本体(1.5m/s)と分身(1.9m/s)でハントごとに速度が変化。離れた2箇所でほぼ同時に干渉を起こす [7, 28, 29]。" 
     },
 
     // --- Interaction & Stealth Focus ---
     { 
         name: "デーモン", 
         evidence: ["UV", "Writing", "Freezing"], 
-        traits: ["has_los", "aggressive", "early", "special_smudge"], 
+        traits: ["early", "items"], 
         threshold: "70% (能力100%)", 
-        desc: "最短20秒間隔で連続ハント。浄化香による阻止時間が60秒と短い。十字架の範囲1.5倍。ナイトメア等でも証拠を隠さない傾向あり。" 
+        desc: "最短20秒間隔で連続ハント。浄化香の阻止時間が60秒。十字架の範囲1.5倍。SAN不問の特殊ハントを持つ [15, 30, 31]。" 
     },
     { 
         name: "スピリット", 
         evidence: ["EMF5", "Box", "Writing"], 
-        traits: ["has_los", "passive", "special_smudge"], 
+        traits: ["items"], 
         threshold: "50%", 
-        desc: "浄化香によるハント防止時間が3分(180秒)持続。特徴がないのが最大の特徴。足音も挙動も全てが標準値。" 
+        desc: "浄化香によるハント防止時間が3分(180秒)持続。特徴がないのが最大の特徴。足音も挙動も全てが標準値 [17, 18, 32]。" 
     },
     { 
         name: "レイス", 
         evidence: ["EMF5", "Box", "DOTS"], 
-        traits: ["has_los", "float", "teleport"], 
+        traits: ["items"], 
         threshold: "50%", 
-        desc: "絶対に塩を踏まない。非ハント時にプレイヤーへ瞬間移動しEMF2/5発生。ハント直後の十字架バイパスに注意。" 
+        desc: "絶対に塩を踏まない。非ハント時にプレイヤーへ瞬間移動しEMF2/5を発生させる [28, 33, 34]。" 
     },
     { 
         name: "ファントム", 
         evidence: ["Box", "UV", "DOTS"], 
-        traits: ["has_los", "stealth", "unique_blink", "sanity_drain"], 
+        traits: ["special_los"], 
         threshold: "50%", 
-        desc: "撮影で消滅しノイズなし。ハント中の点滅消失時間が非常に長い(1～2秒)。直視で正気度激減。プレイヤー座標への徘徊能力あり。" 
+        desc: "撮影で消滅。ハント中の点滅消失時間が非常に長い(1～2秒)。直視でSAN値が秒間0.5%減少する [35-37]。" 
     },
     { 
         name: "ポルターガイスト", 
         evidence: ["Box", "UV", "Writing"], 
-        traits: ["has_los", "throw", "mass_interact"], 
+        traits: ["sound"], 
         threshold: "50%", 
-        desc: "物体一斉投擲(2%SAN減/個)。ハント中は0.5秒ごとに100%の確率で物を投げる。物に溢れた部屋では脅威。" 
+        desc: "物体一斉投擲(2%SAN減/個)。ハント中は0.5秒ごとに100%の確率で周囲の物を投げる(ポップコーン現象) [32, 35, 37]。" 
     },
     { 
         name: "バンシー", 
         evidence: ["UV", "Orbs", "DOTS"], 
-        traits: ["has_los", "stalker", "screamer", "female_only"], 
-        threshold: "ターゲットのSAN 50%", 
-        desc: "1名を執拗に追跡。女性限定。ターゲット以外には殺傷判定なし。パラミックで固有の叫び声(33%)。歌う超常現象を好む。" 
+        traits: ["early", "sound"], 
+        threshold: "ターゲットSAN 50%", 
+        desc: "女性限定。1名を執拗に追跡。ターゲット以外には殺傷判定なし。パラミックで固有の叫び声(33%) [32, 38, 39]。" 
     },
     { 
         name: "メアー", 
         evidence: ["Box", "Orbs", "Writing"], 
-        traits: ["has_los", "dark_affinity", "early"], 
+        traits: ["early", "late"], 
         threshold: "消灯60% / 点灯40%", 
-        desc: "暗闇を好み自ら照明を点けない。点灯直後にスイッチを切る。明るい部屋を嫌い、積極的に長距離徘徊・ルーム変更を行う。" 
+        desc: "暗闇を好み照明を点けない。点灯直後にスイッチを切る能力を持つ。明るい部屋を嫌い徘徊する [40-42]。" 
     },
     { 
         name: "シェード", 
         evidence: ["EMF5", "Writing", "Freezing"], 
-        traits: ["has_los", "shy", "late"], 
+        traits: ["late"], 
         threshold: "35%", 
-        desc: "超消極的。プレイヤーと同室時はハント・干渉・歌唱現象を停止。複数人いると活動低下。火を消す頻度も極端に低い。" 
+        desc: "超消極的。プレイヤーと同室時はハントや干渉を停止。SAN値100%では絶対にイベントを起こさない [18, 43, 44]。" 
     },
     { 
         name: "幽霊", 
         evidence: ["Orbs", "Freezing", "DOTS"], 
-        traits: ["has_los", "sanity_drain", "door_interact"], 
+        traits: ["items"], 
         threshold: "50%", 
-        desc: "扉を「ぬるーっと」全閉しSANを一括15%剥奪。浄化香で90秒間ルームに拘束可能。玄関扉をハント外で閉める唯一のゴースト。" 
+        desc: "扉を「ぬるーっと」全閉しSANを一括15%剥奪。浄化香で90秒間ルームに拘束可能 [32, 45, 46]。" 
     },
     { 
         name: "鬼", 
         evidence: ["EMF5", "Freezing", "DOTS"], 
-        traits: ["has_los", "active", "unique_blink", "sanity_drain"], 
+        traits: ["fast", "special_los"], 
         threshold: "50%", 
-        desc: "プレイヤー近接で活性化。ハント中の点滅で実体化時間が長く非常にはっきり見える。白い靄現象を一切行わない。接触SAN減2倍。" 
+        desc: "プレイヤー近接で活性化。ハント中の実体化時間が長く(0.25-0.5秒)はっきり見える。白い靄現象をしない [6, 36, 47]。" 
     },
     { 
         name: "妖怪", 
         evidence: ["Box", "Orbs", "DOTS"], 
-        traits: ["has_los", "deaf", "voice_trigger", "early"], 
+        traits: ["early", "sound"], 
         threshold: "50% (通) / 80% (話)", 
-        desc: "近くで喋ると早期ハント。ハント中の感知範囲が至近距離(2.5m)に制限される。少し離れた場所での無線チェックが有効。" 
+        desc: "近くで喋ると早期ハント。ハント中の感知範囲が至近距離(2.5m)に制限される。無線チェックが有効 [32, 45, 48]。" 
     },
     { 
         name: "御霊", 
         evidence: ["EMF5", "UV", "DOTS"], 
-        traits: ["has_los", "shy", "dots_exclusive", "forced_evidence"], 
+        traits: ["late"], 
         threshold: "50%", 
-        desc: "カメラ越し＋プレイヤー不在時のみDOTSに映る。ルーム変更・長距離徘徊なし。ナイトメア以上でもDOTS証拠を隠さない。" 
+        desc: "カメラ越し＋プレイヤー不在時のみDOTSに映る。ルーム変更・長距離徘徊なし。DOTS証拠を隠さない [23, 32, 49]。" 
     },
     { 
         name: "マイリング", 
         evidence: ["EMF5", "UV", "Writing"], 
-        traits: ["has_los", "quiet", "audio_range"], 
+        traits: ["sound"], 
         threshold: "50%", 
-        desc: "足音が静か。電子機器干渉(10m)と足音が聞こえ始める距離(12m)がほぼ一致する(通常は20m)。パラミックで頻繁に音を出す。" 
+        desc: "足音が静か。電子機器干渉(10m)と足音が聞こえ始める距離(12m)がほぼ一致する [20, 50, 51]。" 
     },
     { 
         name: "怨霊", 
         evidence: ["Box", "Orbs", "Freezing"], 
-        traits: ["has_los", "fire_hate", "counter_hunt", "early"], 
-        threshold: "60% (無) / 40% (火付近)", 
-        desc: "火を3回消すと正気度不問の特殊ハント。火を十字架より優先。火の付近では通常ハントが抑制される。死亡者が増えるほど火消し加速。" 
+        traits: ["early", "late", "items"], 
+        threshold: "60% (無) / 40% (火付)", 
+        desc: "火を3回消すと正気度不問ハント。火を十字架より優先。火の付近ではハントが抑制される [31, 52, 53]。" 
     },
     { 
         name: "化け狐", 
         evidence: ["EMF5", "UV", "Orbs"], 
-        traits: ["has_los", "shapeshift", "unique_fingerprints", "forced_evidence"], 
+        traits: ["special_los", "items"], 
         threshold: "50%", 
-        desc: "指紋が1/6で特殊(6本指等)。ハント中に少なくとも1回は別モデルへ変身。UVを消す速度が2倍。紫外線の証拠を隠さない。" 
+        desc: "指紋が1/6で特殊(6本指等)。ハント中に一瞬別モデルへ変身(シェイプシフト)。UV証拠を必ず出す [54-56]。" 
     },
     { 
         name: "ミミック", 
         evidence: ["Box", "UV", "Freezing"], 
-        traits: ["variable", "copycat", "orb_feature"], 
-        threshold: "コピー先に準拠", 
-        desc: "【重要】証拠0設定でも擬似オーブが必ず出現。他の全ゴーストの挙動・速度をランダムに模倣する。自身は証拠3つ＋オーブを持つ。" 
+        traits: ["variable", "special_los", "no_los"], 
+        threshold: "模倣先に準拠", 
+        desc: "証拠0設定でも擬似オーブが必ず出現。他の全ゴーストの挙動・速度をランダムに模倣する [32, 40, 57]。" 
     }
 ];
